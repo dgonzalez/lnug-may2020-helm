@@ -1,0 +1,6 @@
+docker:
+  image: lnug-app
+  tag: latest
+replicas: 2
+networking:
+  port: 3000

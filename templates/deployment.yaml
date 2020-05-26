@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lnug-deployment
+  namespace: lnug
+  labels:
+    app: lnug
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: lnug
+  template:
+    metadata:
+      labels:
+        app: lnug
+    spec:
+      containers:
+      - name: lnug
+        image: {{ .Values.docker.image }}:{{ .Values.docker.tag }}
+        env:
+        - name: PORT
+          value: "3000"
+        - name: IP_ADDRESS
+          value: "0.0.0.0"
+        ports:
+        - containerPort: {{ .Values.networking.port }}

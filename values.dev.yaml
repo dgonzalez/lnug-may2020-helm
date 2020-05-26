@@ -1,0 +1,3 @@
+docker:
+  tag: 1.0
+replicas: 1
