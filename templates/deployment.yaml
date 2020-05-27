@@ -18,6 +18,18 @@ spec:
       containers:
       - name: lnug
         image: {{ .Values.docker.image }}:{{ .Values.docker.tag }}
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: {{ .Values.networking.port }}
+          initialDelaySeconds: 10
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: {{ .Values.networking.port }}
+          initialDelaySeconds: 10
+          periodSeconds: 10
         env:
         - name: PORT
           value: "3000"
